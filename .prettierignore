@@ -1,0 +1,8 @@
+node_modules/
+dist/
+output/
+playwright-report/
+test-results/
+package-lock.json
+scripts/web-game-client.mjs
+docs/contracts/

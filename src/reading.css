@@ -1,0 +1,671 @@
+/* Keep the paintings. Give actions the clarity of a small printed game. */
+.game-shell {
+  background-image: none;
+}
+.folio {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 400;
+}
+.primary,
+.intro-overlay .primary,
+.epilogue-actions .primary {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+}
+.control-texture,
+.room-dust {
+  display: none;
+}
+.control-panel {
+  background: #eee7d6;
+}
+.followed-week {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 10px;
+  color: #424e39;
+  font-size: 12px;
+  margin: 4px 0 8px;
+}
+.followed-week span {
+  white-space: nowrap;
+}
+.control-title h1 {
+  font-size: 27px;
+  margin-block: 5px 12px;
+}
+.control-title .folio {
+  font-size: 13px;
+}
+.claim-choice {
+  background: transparent;
+  border-color: #b7b49e;
+  padding: 12px;
+}
+.claim-choice.chosen {
+  background: #faf7ee;
+  border-color: #46533e;
+}
+.claim-choice strong {
+  font:
+    600 16px/1.25 'Gill Sans',
+    'Calibri',
+    sans-serif;
+}
+.claim-choice > span > span {
+  font:
+    14px/1.35 'Gill Sans',
+    'Calibri',
+    sans-serif;
+  margin-top: 4px;
+}
+.channel-choice {
+  min-height: 54px;
+}
+.channel-choice > span {
+  font-size: 14px;
+}
+.channel-choice > span > span {
+  font-size: 12px;
+  line-height: 1.25;
+}
+.metrics-hud > div > span {
+  font-size: 12px;
+}
+.world-caption {
+  background: #1c261fe6;
+  border: 1px solid #a7986a;
+}
+.world-caption > p {
+  letter-spacing: 0;
+  font-size: 21px;
+}
+.world-caption > span {
+  font:
+    13px/1.4 'Gill Sans',
+    'Calibri',
+    sans-serif;
+}
+.world-legend {
+  font-size: 11px;
+  border-color: #77785d;
+}
+.dialogue-stage blockquote {
+  font:
+    23px/1.45 'Gill Sans',
+    'Calibri',
+    sans-serif;
+}
+.dialogue-choices button {
+  font-size: 14px;
+  min-height: 40px;
+  background: transparent;
+  border-radius: 0;
+}
+.dialogue-choices button:before {
+  display: none;
+}
+.scene-record {
+  font-size: 12px;
+}
+.character-role {
+  font-size: 15px;
+}
+.dialogue-context {
+  font-size: 11px;
+}
+.prologue-paper {
+  transform: translateY(-50%);
+  box-shadow: none;
+  background: #ede3ca;
+}
+.claim-inspect span {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  max-width: 80px;
+}
+.epilogue-copy h1 {
+  font-size: clamp(30px, 3.2vw, 49px);
+  line-height: 1.12;
+}
+.epilogue-copy h2 {
+  text-transform: none;
+  letter-spacing: 0;
+  font:
+    20px/1.4 'Gill Sans',
+    'Calibri',
+    sans-serif;
+  margin-block: 12px;
+}
+.epilogue-copy .epilogue-nuance {
+  font-size: 14px;
+  line-height: 1.45;
+}
+.story-quote {
+  margin: 0;
+  border-left: 2px solid #9e8248;
+  padding-left: 16px;
+}
+.story-quote blockquote {
+  font:
+    22px/1.4 Georgia,
+    serif;
+  margin: 0 0 9px;
+}
+.story-quote figcaption {
+  font:
+    12px/1.4 'Gill Sans',
+    'Calibri',
+    sans-serif;
+}
+.story-quote a {
+  color: inherit;
+  text-decoration-color: #9b9274;
+}
+.epilogue-copy .story-quote {
+  margin-block: 18px;
+}
+.epilogue-copy .story-quote blockquote {
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+/* The literary strand has its own page and an increasingly dominant piece of wallpaper. */
+.room-reading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(390px, 1fr);
+  background: #eee7d6;
+  color: #2b3027;
+  animation: none;
+}
+.room-reading:before {
+  display: none;
+}
+.room-picture {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #2c3328;
+}
+.room-picture .scene-art {
+  object-position: 31% center;
+  filter: saturate(0.72);
+}
+.room-light {
+  position: absolute;
+  inset: 0;
+  background: #493d1610;
+  pointer-events: none;
+}
+.room-picture-caption {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  color: #f8eed2;
+  font-size: 13px;
+  padding: 7px 10px;
+  background: #1c261fe8;
+}
+.wall-study {
+  position: absolute;
+  right: 8%;
+  top: 11%;
+  height: 72%;
+  width: 48%;
+  opacity: 0;
+  visibility: hidden;
+  border: 1px solid #726737;
+}
+.wall-study.is-studying,
+.room-chapter-2 .wall-study,
+.room-chapter-3 .wall-study,
+.room-chapter-4 .wall-study {
+  opacity: 1;
+  visibility: visible;
+}
+.wall-drawing {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #b4a15b;
+}
+.wall-drawing pattern path {
+  fill: none;
+  stroke: #6c662f;
+  stroke-width: 2;
+}
+.wall-drawing pattern path + path {
+  stroke-width: 1;
+  opacity: 0.6;
+}
+.paper-seam {
+  stroke: #817346;
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+.woman-in-paper {
+  fill: #373b28;
+  transition: opacity 0.5s;
+}
+.paper-strip {
+  transition: opacity 0.3s;
+}
+.paper-strip.is-pulled {
+  opacity: 0.12;
+}
+.room-chapter-2 .paper-strip.is-pulled {
+  opacity: 0.6;
+}
+.wall-bars {
+  stroke: #4a4a25;
+  stroke-width: 6;
+  opacity: 0.7;
+}
+.room-chapter-3 .room-picture .scene-art,
+.room-chapter-4 .room-picture .scene-art {
+  filter: saturate(0.35) brightness(0.65);
+}
+.room-chapter-3 .wall-study,
+.room-chapter-4 .wall-study {
+  right: 5%;
+  top: 5%;
+  height: 88%;
+  width: 62%;
+}
+.room-chapter-4 .wall-bars {
+  opacity: 0;
+}
+.room-chapter-4 .wall-study {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.room-chapter-4 .paper-strip.is-pulled {
+  opacity: 0.025;
+}
+.room-chapter-4 .wall-drawing {
+  background: #eee7d6;
+}
+.room-chapter-4 .room-picture-caption {
+  top: 20px;
+  bottom: auto;
+}
+.strip-controls {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.strip-controls button {
+  background: transparent;
+  color: #f6edcb;
+  border: 0;
+  border-right: 1px dashed #766b38;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 24px;
+}
+.strip-controls button:last-child {
+  border-right: 0;
+}
+.strip-controls button span {
+  background: #343c2a;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  border: 1px solid #dbcb94;
+}
+.strip-controls button:hover {
+  background: #f8e9a31c;
+}
+.strip-controls button:focus-visible {
+  outline: 3px solid #fff5c7;
+  outline-offset: -4px;
+}
+.strip-controls button.is-pulled span {
+  background: #d4c58b;
+  color: #303728;
+  border-color: #303728;
+}
+.room-page {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  padding: clamp(24px, 3vw, 52px);
+}
+.room-chapter-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid #b9b199;
+  padding-bottom: 14px;
+  font-size: 14px;
+}
+.room-chapter-line > span:last-child {
+  font-variant-numeric: tabular-nums;
+  color: #5f654e;
+}
+.room-time {
+  color: #63684f;
+  font-size: 13px;
+  margin-top: 24px;
+}
+.room-page h1 {
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.12;
+  margin-block: 8px 16px;
+}
+.room-lead {
+  font-size: 17px;
+  line-height: 1.5;
+  max-width: 48ch;
+}
+.room-objects {
+  display: grid;
+  margin-top: 24px;
+  border-top: 1px solid #b9b199;
+}
+.room-objects button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  min-height: 48px;
+  padding: 8px 10px;
+  border: 0;
+  border-bottom: 1px solid #b9b199;
+  background: transparent;
+  font-size: 15px;
+}
+.room-objects button > svg:last-child {
+  margin-left: auto;
+}
+.room-objects button:hover {
+  background: #e1dac5;
+}
+.room-objects button[aria-pressed='true'] {
+  background: #d8d6bd;
+  color: #233124;
+}
+.room-response {
+  margin-block: 20px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.room-response > p {
+  max-width: 49ch;
+}
+.room-response .story-quote {
+  margin-top: 18px;
+}
+.room-response .story-quote blockquote {
+  color: #303827;
+}
+.room-instruction {
+  color: #60664f;
+}
+.room-continue {
+  transition: none;
+  margin-top: auto;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 46px;
+  background: #303e2e !important;
+  color: #f5ecd5 !important;
+  border-color: #303e2e !important;
+}
+.room-continue:disabled {
+  opacity: 1;
+  color: #62664e !important;
+  background: #d8d3bf !important;
+  border-color: #b7b29a !important;
+  cursor: default;
+}
+.room-page .room-reading-note {
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #5f654f;
+}
+
+@media (max-height: 800px) and (min-width: 701px) {
+  .control-panel {
+    gap: 5px;
+    padding: 12px 18px 8px;
+  }
+  .control-title h1 {
+    margin-block: 4px 6px;
+  }
+  .control-panel legend {
+    margin-bottom: 6px;
+  }
+  .channels {
+    margin-top: 12px;
+  }
+  .claim-choice {
+    padding: 8px;
+    margin-bottom: 6px;
+  }
+  .followed-citizen {
+    padding-top: 6px;
+    min-height: 42px;
+  }
+  .followed-week {
+    margin: 0;
+    font-size: 11px;
+  }
+  .model-footnote {
+    font-size: 10px;
+    margin: 0;
+  }
+  .room-page {
+    padding: 24px 28px;
+  }
+  .room-time {
+    margin-top: 14px;
+  }
+  .room-page h1 {
+    font-size: 33px;
+    margin-bottom: 12px;
+  }
+  .room-lead {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  .room-objects {
+    margin-top: 18px;
+  }
+  .room-objects button {
+    min-height: 43px;
+  }
+  .room-response {
+    font-size: 14px;
+    margin-block: 14px;
+  }
+  .room-response .story-quote {
+    margin-top: 12px;
+  }
+  .room-response .story-quote blockquote {
+    font-size: 20px;
+  }
+  .dialogue-stage blockquote {
+    font-size: 21px;
+  }
+  .dialogue-choices button {
+    font-size: 13px;
+    min-height: 36px;
+  }
+  .control-title h1 {
+    font-size: 25px;
+  }
+  .claim-choice {
+    padding: 9px;
+  }
+  .channel-choice {
+    min-height: 45px;
+  }
+}
+@media (max-width: 700px) {
+  .followed-week {
+    display: none;
+  }
+  .room-reading {
+    grid-template-columns: 1fr;
+    grid-template-rows: 26% minmax(0, 1fr);
+  }
+  .room-picture .scene-art {
+    height: 100%;
+    object-position: 30% 49%;
+  }
+  .room-picture-caption {
+    left: 16px;
+    bottom: 12px;
+    font-size: 11px;
+  }
+  .wall-study,
+  .room-chapter-3 .wall-study,
+  .room-chapter-4 .wall-study {
+    top: 0;
+    right: 6%;
+    height: 100%;
+    width: 46%;
+  }
+  .room-chapter-4 .wall-study {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .room-chapter-4 .wall-drawing {
+    object-fit: cover;
+  }
+  .strip-controls button {
+    padding-bottom: 12px;
+  }
+  .strip-controls button span {
+    width: 36px;
+    height: 36px;
+  }
+  .room-page {
+    padding: 15px 20px 16px;
+  }
+  .room-chapter-line {
+    font-size: 12px;
+    padding-bottom: 9px;
+  }
+  .room-time {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .room-page h1 {
+    font-size: 29px;
+    margin-block: 5px 10px;
+  }
+  .room-lead {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .room-objects {
+    margin-top: 14px;
+  }
+  .room-objects button {
+    min-height: 42px;
+    padding-block: 6px;
+    font-size: 14px;
+  }
+  .room-response {
+    margin-block: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .room-response .story-quote {
+    margin-top: 10px;
+    padding-left: 12px;
+  }
+  .room-response .story-quote blockquote {
+    font-size: 18px;
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+  .room-response .story-quote figcaption {
+    font-size: 11px;
+  }
+  .room-continue {
+    font-size: 14px;
+    min-height: 44px;
+    padding: 10px 12px;
+  }
+  .room-page .room-reading-note {
+    font-size: 10px;
+    margin-top: 8px;
+  }
+  .metrics-hud > div > span {
+    font-size: 9px;
+  }
+  .world-caption > p {
+    font-size: 16px;
+  }
+  .world-caption > span {
+    font-size: 10px;
+  }
+  .world-legend {
+    font-size: 9px;
+  }
+  .dialogue-stage blockquote,
+  .encounter-scene .dialogue-stage blockquote {
+    font-size: 18px;
+  }
+  .dialogue-choices button,
+  .encounter-scene .dialogue-choices button {
+    font-size: 13px;
+    min-height: 36px;
+  }
+  .scene-record {
+    font-size: 11px;
+  }
+  .epilogue-copy h1 {
+    font-size: 32px;
+  }
+  .epilogue-copy h2 {
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+  .epilogue-copy .epilogue-nuance {
+    font-size: 12px;
+  }
+  .epilogue-copy .story-quote {
+    margin-block: 14px;
+  }
+}
+@media (max-width: 700px) and (max-height: 760px) {
+  .room-reading {
+    grid-template-rows: 18% minmax(0, 1fr);
+  }
+  .room-time {
+    display: none;
+  }
+  .room-page h1 {
+    font-size: 25px;
+  }
+  .room-page {
+    padding-block: 12px;
+  }
+  .room-lead {
+    font-size: 14px;
+  }
+  .room-objects {
+    margin-top: 10px;
+  }
+  .room-response {
+    font-size: 13px;
+    margin-block: 10px;
+  }
+}
