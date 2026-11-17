@@ -40,5 +40,5 @@ export function useAmbience(press: boolean) {
     },
     [],
   );
-  return { enabled, toggle: () => setEnabled((value) => !value) };
+  return { enabled, enable: () => setEnabled(true), toggle: () => setEnabled((value) => !value) };
 }

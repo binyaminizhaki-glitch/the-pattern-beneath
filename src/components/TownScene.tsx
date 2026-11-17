@@ -65,6 +65,8 @@ export default function TownScene({
   events = [],
   compact = false,
   className = '',
+  minimal = false,
+  interactive = true,
 }: {
   snapshot: TurnSnapshot;
   seed: number;
@@ -77,6 +79,8 @@ export default function TownScene({
   events?: VisualEvent[];
   compact?: boolean;
   className?: string;
+  minimal?: boolean;
+  interactive?: boolean;
 }) {
   const reduced = useReducedMotion();
   const selected = snapshot.agents.find((a) => a.id === selectedId)!;
@@ -104,6 +108,7 @@ export default function TownScene({
       <svg
         className="world-svg"
         viewBox="0 0 920 550"
+        preserveAspectRatio={minimal ? 'xMidYMid slice' : 'xMidYMid meet'}
         role="group"
         aria-label={`Vesper town, week ${snapshot.turn}. School, Clinic, Gazette and 48 persistent citizens.`}
       >
@@ -154,12 +159,12 @@ export default function TownScene({
             return (
               <g
                 key={institution.id}
-                role="button"
-                tabIndex={0}
+                role={interactive ? 'button' : undefined}
+                tabIndex={interactive ? 0 : undefined}
                 aria-label={`Inspect ${institution.name}: ${institution.rule} access`}
-                onClick={() => onInstitution(institution.id)}
+                onClick={() => interactive && onInstitution(institution.id)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (interactive && (e.key === 'Enter' || e.key === ' ')) {
                     e.preventDefault();
                     onInstitution(institution.id);
                   }
@@ -179,15 +184,27 @@ export default function TownScene({
                 />
                 <g transform={`translate(${p.x} ${p.y + 18})`} className="institution-flag">
                   <text textAnchor="middle" y="-19" className="building-name">
-                    {institution.name}
+                    {minimal
+                      ? institution.id === 'school'
+                        ? 'School'
+                        : institution.id === 'clinic'
+                          ? 'Clinic'
+                          : 'Gazette'
+                      : institution.name}
                   </text>
                   <rect x="-64" y="-10" width="128" height="20" rx="2" />
                   <text textAnchor="middle" y="4">
-                    {restricted
-                      ? 'Restrictive rule'
-                      : institution.rule === 'partial'
-                        ? 'Partial access'
-                        : 'Open access'}
+                    {minimal
+                      ? restricted
+                        ? '×'
+                        : institution.rule === 'partial'
+                          ? '−'
+                          : '✓'
+                      : restricted
+                        ? 'Restrictive rule'
+                        : institution.rule === 'partial'
+                          ? 'Partial access'
+                          : 'Open access'}
                   </text>
                   {restricted && <path d="M-54-4v8m-3-8v8" />}
                 </g>
@@ -212,17 +229,17 @@ export default function TownScene({
                 animate={{ x: p.x, y: p.y }}
                 transition={{ duration: reduced ? 0 : 0.75, ease: 'easeInOut' }}
                 className={`world-person ${state} ${agent.id === selectedId ? 'followed' : ''} ${phase === 2 && changed ? 'belief-reaction' : ''}`}
-                role={compact ? undefined : 'button'}
-                tabIndex={compact ? undefined : 0}
+                role={compact || !interactive ? undefined : 'button'}
+                tabIndex={compact || !interactive ? undefined : 0}
                 aria-hidden={compact ? true : undefined}
                 aria-label={
                   compact
                     ? undefined
                     : `Follow ${agent.name}, ${agent.gender}; ${state}${d.published ? '; published this week' : ''}`
                 }
-                onClick={() => onCitizen(agent.id)}
+                onClick={() => interactive && onCitizen(agent.id)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                  if (interactive && (e.key === 'Enter' || e.key === ' ')) {
                     e.preventDefault();
                     onCitizen(agent.id);
                   }
@@ -283,19 +300,20 @@ export default function TownScene({
               })}
           </g>
         )}
-        {visibleEvents.map((event) => (
-          <g
-            key={event.institution}
-            className={`world-event ${event.kind}`}
-            transform={`translate(${BUILDINGS[event.institution].x} ${BUILDINGS[event.institution].y - 177})`}
-            aria-hidden="true"
-          >
-            <rect x="-155" y="-29" width="310" height="30" rx="3" />
-            <text textAnchor="middle" y="-10">
-              {event.text}
-            </text>
-          </g>
-        ))}
+        {!minimal &&
+          visibleEvents.map((event) => (
+            <g
+              key={event.institution}
+              className={`world-event ${event.kind}`}
+              transform={`translate(${BUILDINGS[event.institution].x} ${BUILDINGS[event.institution].y - 177})`}
+              aria-hidden="true"
+            >
+              <rect x="-155" y="-29" width="310" height="30" rx="3" />
+              <text textAnchor="middle" y="-10">
+                {event.text}
+              </text>
+            </g>
+          ))}
       </svg>
     </div>
   );

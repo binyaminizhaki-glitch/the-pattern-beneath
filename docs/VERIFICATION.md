@@ -1,4 +1,19 @@
-# Verification and delivery
+# Cinematic game — 17 November 2026
+
+The current app restores the original room and live town. Start plays four verified quotes and a bridge automatically; each subsequent message choice advances one week through the unchanged engine. No forced reading, encounter or intermediate popup interrupts the eight-week game.
+
+- `npm run test`: all 28 unit tests pass, including the active cinematic scene reducer and the unchanged engine invariants.
+- `npm run build`: strict TypeScript and Vite production build pass.
+- `npm run format:check`: passes.
+- `npm run test:e2e`: all 20 production browser scenarios pass across the four target viewports (5.3 minutes). The test clock freezes during precise phase inspection and resumes before Axe scans, which require browser timers.
+- Browser scenarios cover the automatic opening, pause/resume, hidden page and modal suspension, skip, duplicate clicks, restart during a turn, eight mixed and eight restrictive choices, exact engine results, optional records, source links, comparison, ending, replay, local assets and the project subpath.
+- Desktop and mobile screenshots under `output/screenshots/cinematic-*` were visually inspected, including the opening, live town, comparison and ending. The mobile view fills the play area and supports horizontal swipe and arrow navigation. Primary controls fit all four tested viewports, and the configured Axe scans report no violations.
+- The supplied game client passes and captures the first cinematic quote and matching text state under `output/cinematic-game-client-final/`. No remote runtime API is used.
+- Four opening quotations and the closing excerpt use the source's original wording; see [source record](CINEMATIC_FLOW.md). The introductory bridge is separate game text. The original ending illustration is preserved. All simulation files remain unchanged.
+
+Browser verification uses Chromium at 1280×720, 1440×900, 1920×1080 and 390×844. Other browser engines, physical phones and screen-reader software were not separately tested. Optional record dialogs scroll internally; the stage stays inside the viewport. PDF page links depend on browser viewer support. No deployment or push was performed.
+
+# Historical verification of the earlier simulation
 
 Verified locally on Windows with Node 24.13.0. This is the actual React/TypeScript/Vite application and pure agent simulation, not a static prototype. Nothing was pushed or deployed.
 
@@ -17,15 +32,15 @@ The source PDF and illustration add 5,007,740 bytes in `public/sources/`. They a
 
 ## Previous revision checks
 
-| Command | Result |
-| --- | --- |
-| `npm run build` | PASS. TypeScript and Vite production compilation. HTML 0.73 KB; CSS 71.15 KB (16.27 KB gzip); JS 433.95 KB (138.77 KB gzip). |
-| `npm test` | PASS. 24 tests in 3 files: 17 original engine invariants, 2 presentation tests, 5 narrative tests. |
-| `npm run test:e2e` | PASS. 24 tests across all four production viewports, including dialogue, complete eight-week paths and full subpath playthroughs. Final dialogue regression: 8.2 minutes. |
-| `npm run audit:model` | PASS. 9 reproducible runs, seeds 1/42/123, both narratives and passive control. |
-| `npm run format:check` | PASS. |
-| `npm audit` | PASS. Zero known reported dependency vulnerabilities, including development dependencies. |
-| `npm run test:game` | PASS. Supplied game-skill browser client captures a scene and state without browser errors; its short capture ends in the prologue. Full gameplay is covered by the production Playwright suite. |
+| Command                | Result                                                                                                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run build`        | PASS. TypeScript and Vite production compilation. HTML 0.73 KB; CSS 71.15 KB (16.27 KB gzip); JS 433.95 KB (138.77 KB gzip).                                                                     |
+| `npm test`             | PASS. 24 tests in 3 files: 17 original engine invariants, 2 presentation tests, 5 narrative tests.                                                                                               |
+| `npm run test:e2e`     | PASS. 24 tests across all four production viewports, including dialogue, complete eight-week paths and full subpath playthroughs. Final dialogue regression: 8.2 minutes.                        |
+| `npm run audit:model`  | PASS. 9 reproducible runs, seeds 1/42/123, both narratives and passive control.                                                                                                                  |
+| `npm run format:check` | PASS.                                                                                                                                                                                            |
+| `npm audit`            | PASS. Zero known reported dependency vulnerabilities, including development dependencies.                                                                                                        |
+| `npm run test:game`    | PASS. Supplied game-skill browser client captures a scene and state without browser errors; its short capture ends in the prologue. Full gameplay is covered by the production Playwright suite. |
 
 Production Chromium viewports: **1280×720, 1440×900, 1920×1080, 390×844**. The dialogue revision adds a sixth scenario per size: challenges and evidence through every institutional voice, keyboard continuation, unchanged state and dialogue bounds. The other five scenarios cover the complete mixed-channel story; keyboard/reduced-motion/duplicate-release/reset; eight quiet weeks; eight restrictive weeks; production project subpath through the ending and replay. The production subpath server serves `dist/` at `/the-pattern-beneath/`; no hosting service is involved.
 
@@ -40,16 +55,16 @@ Document width/height must equal the viewport; scroll offsets remain zero. Prima
 Actual total publications in intervention weeks **1–8**, excluding the opening edition. Each seed/strategy uses the same immutable aptitudes and per-person/event draws.
 
 | Seed | Repeated Gazette narrative | Women’s works | Men’s works |
-| --- | --- | ---: | ---: |
-| 1 | Hierarchy | 9 | 83 |
-| 1 | Equal potential | 85 | 83 |
-| 1 | No intervention | 22 | 83 |
-| 42 | Hierarchy | 9 | 95 |
-| 42 | Equal potential | 81 | 95 |
-| 42 | No intervention | 24 | 95 |
-| 123 | Hierarchy | 9 | 100 |
-| 123 | Equal potential | 76 | 100 |
-| 123 | No intervention | 18 | 100 |
+| ---- | -------------------------- | ------------: | ----------: |
+| 1    | Hierarchy                  |             9 |          83 |
+| 1    | Equal potential            |            85 |          83 |
+| 1    | No intervention            |            22 |          83 |
+| 42   | Hierarchy                  |             9 |          95 |
+| 42   | Equal potential            |            81 |          95 |
+| 42   | No intervention            |            24 |          95 |
+| 123  | Hierarchy                  |             9 |         100 |
+| 123  | Equal potential            |            76 |         100 |
+| 123  | No intervention            |            18 |         100 |
 
 Aptitude stayed unchanged in every run. Passive replay was identical for all three seeds. These are fictional model results, not empirical evidence about real populations. No dashboard value is directly assigned by a player choice. See `SIMULATION_MODEL.md` for the actual equations and assumptions and `../output/model-audit.json` for the audit data.
 
