@@ -54,16 +54,30 @@ test('eight direct choices animate real records without intermediate scenes or p
   await fit(page);
   await accessible(page);
   await page.screenshot({ path: `output/screenshots/cinematic-town-${info.project.name}.png` });
-  await freezeClock(page);
   const pan = page.getByRole('button', { name: 'Look right across town', exact: true });
   if (await pan.isVisible()) {
     const start = await page.locator('.town-view').evaluate((el) => el.scrollLeft);
+    const distance = page.viewportSize()!.width * 0.75;
     await pan.click();
-    await page.clock.runFor(500);
-    expect(await page.locator('.town-view').evaluate((el) => el.scrollLeft)).toBeGreaterThan(start);
+    await expect
+      .poll(() =>
+        page
+          .locator('.town-view')
+          .evaluate((el, target) => Math.abs(el.scrollLeft - target), start + distance),
+      )
+      .toBeLessThanOrEqual(1);
     await page.getByRole('button', { name: 'Look left across town', exact: true }).click();
-    await page.clock.runFor(500);
+    await expect
+      .poll(() =>
+        page
+          .locator('.town-view')
+          .evaluate((el, target) => Math.abs(el.scrollLeft - target), start),
+      )
+      .toBeLessThanOrEqual(1);
   }
+  // Native smooth scrolling uses the compositor clock, not the mocked JS clock.
+  // Freeze only the simulation phases, after the real scrolling has settled.
+  await freezeClock(page);
   let expected = initializeWorld(42);
   await page.getByRole('button', { name: 'Let people try', exact: true }).click();
   expected = stepWorld(expected, { narrative: 'equal-agency', channel: 'gazette' });
